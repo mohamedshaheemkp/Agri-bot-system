@@ -19,9 +19,6 @@ pip-delete-this-directory.txt
 # YOLO / Models / Data
 *.pt
 *.onnx
-data/
-models/yolov9/
-datasets/
 runs/
 
 # OS generated files
