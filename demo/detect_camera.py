@@ -11,15 +11,19 @@ model = torch.hub.load(
 )
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    raise RuntimeError("Failed to open camera")
 
 while True:
 
     ret, frame = cap.read()
+    if not ret or frame is None:
+        print("Failed to read frame, exiting...")
+        break
 
     results = model(frame)
 
     frame = results.render()[0]
-
     cv2.imshow("Agri Bot Detection", frame)
 
     if cv2.waitKey(1) == 27:

@@ -1,10 +1,15 @@
-from fastapi import FastAPI, UploadFile, File
+import sys
+import os
 import torch
+from fastapi import FastAPI, UploadFile, File
 import numpy as np
 import cv2
 
 app = FastAPI()
+# add yolov9 to path
+sys.path.append(os.path.abspath("yolov9"))
 
+# load model
 model = torch.hub.load(
     'yolov9',
     'custom',
@@ -12,6 +17,7 @@ model = torch.hub.load(
     source='local'
 )
 
+model.conf = 0.25
 @app.post("/detect")
 
 async def detect(file: UploadFile = File(...)):
