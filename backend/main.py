@@ -4,6 +4,7 @@ import torch
 from fastapi import FastAPI, UploadFile, File
 import numpy as np
 import cv2
+from .detect import *
 
 app = FastAPI()
 # add yolov9 to path

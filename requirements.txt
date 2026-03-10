@@ -1,7 +1,6 @@
 ﻿# PyTorch and GPU
-torch==2.1.2+cu118
-torchvision==0.16.2+cu118
-torchaudio==2.1.2+cu118
+torch
+torch
 
 # Core Data & Image Processing
 numpy==1.26.4
