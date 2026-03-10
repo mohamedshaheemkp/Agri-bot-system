@@ -1,36 +1,103 @@
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f9;
+body{
+margin:0;
+font-family:Arial;
+background:#eef7ee;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+.container{
+display:flex;
+height:100vh;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
+/* Sidebar */
+
+.sidebar{
+
+width:220px;
+background:#1b5e20;
+color:white;
+padding:20px;
+
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 10px;
+.sidebar ul{
+
+list-style:none;
+padding:0;
+
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+.sidebar li{
+
+padding:15px;
+cursor:pointer;
+
 }
 
-main {
-    padding: 2rem;
-    text-align: center;
+.sidebar li:hover{
+
+background:#2e7d32;
+
+}
+
+/* Main */
+
+.main{
+
+flex:1;
+padding:30px;
+
+}
+
+.cards{
+
+display:flex;
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+width:200px;
+
+}
+
+/* Sections */
+
+.section{
+
+margin-top:20px;
+
+}
+
+.hidden{
+
+display:none;
+
+}
+
+/* Image preview */
+
+#preview{
+
+max-width:300px;
+margin-top:10px;
+
+}
+
+/* Chatbot */
+
+#chatbox{
+
+height:250px;
+background:white;
+border-radius:10px;
+overflow:auto;
+padding:10px;
+margin-bottom:10px;
+
 }
