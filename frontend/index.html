@@ -1,25 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agri-bot System</title>
-    <link rel="stylesheet" href="style.css">
+<title>Agri AI System</title>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to Agri-bot System</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="pages/detect.html">Detect</a></li>
-                <li><a href="pages/chatbot.html">Chatbot</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <p>This is the main page.</p>
-    </main>
-    <script src="script.js"></script>
+
+<h1>🌱 Plant Disease Detection</h1>
+
+<input type="file" id="imageUpload">
+
+<button onclick="detect()">Detect Disease</button>
+
+<div id="result"></div>
+
+<script>
+
+async function detect(){
+
+const file=document.getElementById("imageUpload").files[0]
+
+const formData=new FormData()
+
+formData.append("file",file)
+
+const res=await fetch(
+"http://127.0.0.1:8000/detect",
+{
+method:"POST",
+body:formData
+}
+)
+
+const data=await res.json()
+
+let html=""
+
+data.detections.forEach(d=>{
+
+html+=`
+<h3>Disease: ${d.disease}</h3>
+<p>Confidence: ${d.confidence}</p>
+<hr>
+`
+
+})
+
+document.getElementById("result").innerHTML=html
+
+}
+
+</script>
+
 </body>
 </html>

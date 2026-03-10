@@ -1,80 +1,34 @@
-function showSection(section) {
+async function detect(){
 
-    document.querySelectorAll(".section")
-        .forEach(s => s.classList.add("hidden"))
+const file=document.getElementById("imageUpload").files[0]
 
-    document.getElementById(section)
-        .classList.remove("hidden")
+const formData=new FormData()
 
+formData.append("file",file)
+
+const res=await fetch(
+"http://127.0.0.1:8000/detect",
+{
+method:"POST",
+body:formData
 }
+)
 
-/* Image Preview */
+const data=await res.json()
 
-document.getElementById("imageUpload")
-    .onchange = function (e) {
+let html=""
 
-        const file = e.target.files[0]
+data.detections.forEach(d=>{
 
-        document.getElementById("preview")
-            .src = URL.createObjectURL(file)
+html+=`
+<h2>${d.disease}</h2>
+<p>Confidence: ${d.confidence}</p>
+<p>${d.explanation}</p>
+<hr>
+`
 
-    }
+})
 
-/* Detect Disease */
-
-async function detect() {
-
-    const fileInput = document.getElementById("imageUpload")
-
-    const formData = new FormData()
-
-    formData.append("file", fileInput.files[0])
-
-    const res = await fetch(
-        "http://127.0.0.1:8000/detect",
-        {
-            method: "POST",
-            body: formData
-        }
-    )
-
-    const data = await res.json()
-
-    document.getElementById("resultBox")
-        .innerHTML = JSON.stringify(data)
-
-}
-
-/* Camera */
-
-function startCamera() {
-
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-
-            document.getElementById("video").srcObject = stream
-
-        })
-
-}
-
-/* Chatbot */
-
-async function sendMessage() {
-
-    let msg = document.getElementById("userInput").value
-
-    document.getElementById("chatbox")
-        .innerHTML += `<p><b>You:</b> ${msg}</p>`
-
-    const res = await fetch(
-        `http://127.0.0.1:8000/chatbot?message=${msg}`,
-        { method: "POST" }
-    )
-
-    const data = await res.json()
-
-    document.getElementById("chatbox")
-        .innerHTML += `<p><b>Bot:</b> ${data.response}</p>`
+document.getElementById("result").innerHTML=html
 
 }
