@@ -45,6 +45,7 @@ yolov9/runs/
 # Large Directories
 Dataset/
 models/weights/
+!backend/models/*.pt
 
 # VS Code / IDE
 .vscode/
